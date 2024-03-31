@@ -15,7 +15,7 @@ class Room(models.Model):
 
 class Window(models.Model):
     window_number = models.IntegerField()
-    date_id = models.ForeignKey(to=Date)
+    date_id = models.ForeignKey(to=Date, verbose_name="windows")
     is_light = models.BooleanField()
     floor = models.IntegerField()
-    room_id  = models.ForeignKey(to=Room)
+    room  = models.ForeignKey(to=Room)
