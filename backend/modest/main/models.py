@@ -3,6 +3,7 @@ from django.db import models
 
 
 class Date(models.Model):
+    date = models.DateField()
     windows_quantity = models.IntegerField()
     windows_in_floor = models.IntegerField()
 
@@ -13,7 +14,7 @@ class Room(models.Model):
 
 
 class Window(models.Model):
-    Window_number = models.IntegerField()
+    window_number = models.IntegerField()
     date_id = models.ForeignKey(to=Date)
     is_light = models.BooleanField()
     floor = models.IntegerField()
