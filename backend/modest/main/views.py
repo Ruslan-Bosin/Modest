@@ -16,9 +16,10 @@ class GetWindowsFromDay(APIView):
 class GetAllDate:
     def get(self, request, *args, **kwargs):
         allDate = models.Date.objects.all()
-        print(allDate)
-        return {"allDate": allDate}
-
+        arr = []
+        for i in allDate:
+            arr.append({"value": i.id, "label": i["date"]})
+        return {"allDate": arr}
 
 """
 class CreateDate(APIView):

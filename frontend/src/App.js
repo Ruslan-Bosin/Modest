@@ -88,11 +88,11 @@ function App() {
       </>,
     },
   ];
-
-  const [options, setOptions] = useState([
-    { value: 'd1', label: '1st december' },
-    { value: 'd1', label: '....' },
-  ])
+  const [options, setOptions] = useState([])
+  useEffect(() => {
+    axios.get(prize_list, {}).then(response => {
+      setOptions(response.data.allDate);
+    }).catch(error => {}, []);
 
   const [cellsData, setCellsData] = useState({
     rowsCount: 2,
