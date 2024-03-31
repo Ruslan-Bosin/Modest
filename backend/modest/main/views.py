@@ -3,7 +3,6 @@ from main import models
 from main import serializers
 
 
-
 class GetWindowsFromDay(APIView):
     def get(self, request, *args, **kwargs):
         day, month, year = request.GET.get("day"), request.GET.get("month"), request.GET.get("year")
@@ -14,4 +13,16 @@ class GetWindowsFromDay(APIView):
         return {"rowsCount": rows_count, "columnsCount": columns_count, "data": serializers.Window_serializer(windows, many=True)}
 
 
-# class 
+class GetAllDate:
+    def get(self, request, *args, **kwargs):
+        allDate = models.Date.objects.all()
+        print(allDate)
+        return {"allDate": allDate}
+
+
+"""
+class CreateDate(APIView):
+    def post(self, request, *args, **kwargs):
+        date = request.data.get("date")
+        windows_quantity = request.data.get("windows_quantity")
+"""
