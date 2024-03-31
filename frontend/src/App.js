@@ -2,45 +2,6 @@ import { Button, Descriptions, Input, Modal, Select } from "antd";
 import React, { useState } from "react";
 import Cell from "./components/Cell";
 
-const descriptionItems = [
-  {
-    key: '1',
-    label: 'Входные данные',
-    children: <>
-      <Descriptions layout="vertical" items={[
-        {
-          key: '3',
-          label: 'Количество комнат на этаж',
-          children: "4"
-        },
-        {
-          key: '4',
-          label: 'Окна на этаже',
-          children: "3 2 1"
-        }
-      ]} />
-    </>,
-  },
-  {
-    key: '2',
-    label: 'Ответ',
-    children: <>
-      <Descriptions layout="vertical" items={[
-        {
-          key: '5',
-          label: 'Количество комнат',
-          children: "8"
-        },
-        {
-          key: '6',
-          label: 'Номера комнат',
-          children: "1, 2, 4, 6, 7, 8, 11, 12"
-        }
-      ]} />
-    </>,
-  },
-];
-
 // Styles
 const body = {
   postion: "absolute",
@@ -83,6 +44,50 @@ function App() {
   const [rows, setRows] = useState(2)
   const [input2, setInput2] = useState();
   const [json, setJson] = useState("")
+
+  const [a1, setA1] = useState("4")
+  const [a2, setA2] = useState("3 2 1")
+  const [b1, setB1] = useState('8')
+  const [b2, setB2] = useState('1, 2, 4, 6, 7, 8, 11, 12')
+
+  const descriptionItems = [
+    {
+      key: '1',
+      label: 'Входные данные',
+      children: <>
+        <Descriptions layout="vertical" items={[
+          {
+            key: '3',
+            label: 'Количество комнат на этаж',
+            children: a1
+          },
+          {
+            key: '4',
+            label: 'Окна на этаже',
+            children: a2
+          }
+        ]} />
+      </>,
+    },
+    {
+      key: '2',
+      label: 'Ответ',
+      children: <>
+        <Descriptions layout="vertical" items={[
+          {
+            key: '5',
+            label: 'Количество комнат',
+            children: b1
+          },
+          {
+            key: '6',
+            label: 'Номера комнат',
+            children: b2
+          }
+        ]} />
+      </>,
+    },
+  ];
 
   const [options, setOptions] = useState([
     { value: 'd1', label: '1st december' },
@@ -183,9 +188,13 @@ function App() {
             })
             setRows(result);
           }} placeholder="Окна на этаже" />
-          <Input value={json} onChange={event => {
-            setJson(event.target.value);
-          }} placeholder="Json" />
+          <div style={min_grid}>
+            {
+              Array.from(Array(columns * rows).keys()).map(index => {
+                return <div onClick={() => { console.log(index) }}><Cell key={index + 1} colored={false}></Cell></div>
+              })
+            }
+          </div>
         </div>
       </Modal>
     </div>
@@ -193,11 +202,3 @@ function App() {
 }
 
 export default App;
-
-/*
-<div style={min_grid}>
-  {Array.from(Array(columns * rows).keys()).map(index => {
-    return <Cell key={index + 1} colored={false}></Cell>
-  })}
-</div>
-*/
