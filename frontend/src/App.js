@@ -158,10 +158,6 @@ function App() {
     gap: "10px 10px"
   }
 
-  const [floor1, setFloor1] = useState("")
-  const [floor2, setFloor2] = useState("")
-  const [floor3, setFloor3] = useState("")
-  const [floor4, setFloor4] = useState("")
 
 
   return (
@@ -180,27 +176,38 @@ function App() {
           <Descriptions layout="horizontal" bordered items={descriptionItems} />
         </div>
       </div>
-      <Modal title="Добавление" open={isModalOpen} onOk={() => {
-        // ...
-      }} onCancel={() => { setIsModalOpen(false) }}>
+      <Modal title="Добавление" open={isModalOpen} onOk={() => { }} onCancel={() => { setIsModalOpen(false) }}>
         <div style={modal}>
           <Input value={columns} onChange={event => {
-            setColumns(Number(event.target.value));
+            const n = Number(event.target.value);
+            if (n != NaN) {
+              setColumns(Number(event.target.value));
+            }
           }} placeholder="Количество комнат на этаж" />
           <Input value={input2} onChange={event => {
-            setInput2(event.target.value);
-            const parts = event.target.value.split(' ');
-            var result = 0;
-            parts.map(item => {
-              result += Number(item)
-            })
-            setRows(result);
+            try {
+              setInput2(event.target.value);
+              const parts = event.target.value.split(' ');
+              var result = 0;
+              parts.map(item => {
+                result += Number(item)
+              })
+              setRows(result);
+            } catch (e) {
+              console.log(e)
+            }
           }} placeholder="Окна на этаже" />
-          <hr />
-          <Input value={floor1} onChange={event => { setFloor1(event.target.value) }} placeholder="Этаж 1" />
-          <Input value={floor2} onChange={event => { setFloor2(event.target.value) }} placeholder="Этаж 2" />
-          <Input value={floor3} onChange={event => { setFloor3(event.target.value) }} placeholder="Этаж 3" />
-          <Input value={floor4} onChange={event => { setFloor4(event.target.value) }} placeholder="Этаж 4" />
+          <div>
+            <div style={min_grid}>
+              {
+                Array.from(Array(columns * rows).keys()).map(index => {
+                  return <div onClick={() => { console.log(index) }}>
+                    <Cell key={index + 1} colored={false}></Cell>
+                  </div>
+                })
+              }
+            </div>
+          </div>
         </div>
       </Modal>
     </div>
