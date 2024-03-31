@@ -82,6 +82,7 @@ function App() {
   const [columns, setColumns] = useState(4)
   const [rows, setRows] = useState(2)
   const [input2, setInput2] = useState();
+  const [json, setJson] = useState("")
 
   const [options, setOptions] = useState([
     { value: 'd1', label: '1st december' },
@@ -182,11 +183,9 @@ function App() {
             })
             setRows(result);
           }} placeholder="Окна на этаже" />
-          <div style={min_grid}>
-            {Array.from(Array(columns * rows).keys()).map(index => {
-              return <Cell key={index + 1} colored={false}></Cell>
-            })}
-          </div>
+          <Input value={json} onChange={event => {
+            setJson(event.target.value);
+          }} placeholder="Json" />
         </div>
       </Modal>
     </div>
@@ -194,3 +193,11 @@ function App() {
 }
 
 export default App;
+
+/*
+<div style={min_grid}>
+  {Array.from(Array(columns * rows).keys()).map(index => {
+    return <Cell key={index + 1} colored={false}></Cell>
+  })}
+</div>
+*/
